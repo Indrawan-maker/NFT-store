@@ -21,7 +21,16 @@ signinForm.addEventListener('submit', async (e) => {
         })
 
         const data = await res.json()
+
+        if(res.ok) {
+            window.location.href = '/'
+        } else {
+            errorMessage.textContent = data.error || 'Login fail please try again'
+        }
     } catch (error) {
-        
+        console.log('network error', error)
+        errorMessage.textContent = 'Unable to connect. please try again.'
+    } finally {
+        submitBtn.disabled = false
     }
 })
